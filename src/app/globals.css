@@ -3,25 +3,128 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.chat-widget-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes twinkle {
+  from {
+    background-position: 0 0;
   }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+@keyframes move-clouds {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px 0;
+  }
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent url("/stars.png") repeat top center;
+  z-index: 0;
+}
+
+.twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent url("/twinkling.png") repeat top center;
+  z-index: 1;
+  animation: twinkle 200s linear infinite;
+}
+
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent url("/clouds.png") repeat top center;
+  z-index: 2;
+  opacity: 0.3;
+  animation: move-clouds 150s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-900 {
+  animation-delay: 900ms;
+}
+
+/* Add this to your existing globals.css */
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
 }
